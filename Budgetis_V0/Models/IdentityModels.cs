@@ -23,6 +23,9 @@ namespace Budgetis_V0.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+
+
+            // COMMENT
         }
 
         public static ApplicationDbContext Create()

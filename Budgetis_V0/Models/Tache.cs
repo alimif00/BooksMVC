@@ -10,6 +10,5 @@ namespace Budgetis_V0.Models
         public int id { get; set; }
         public String description { get; set; }
         public double cout { get; set; }
-
     }
 }

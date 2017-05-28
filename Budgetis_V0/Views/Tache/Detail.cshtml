@@ -1,0 +1,26 @@
+﻿@model Budgetis_V0.Models.Tache
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.description</h2>
+ <table class="table table-bordered table-hover">
+       
+        <tbody>
+
+          
+            <tr>
+                <td> <strong>Description</strong></td>
+                <td>@Model.description</td>
+                </tr>
+            <tr>
+                <td><strong>Cout</strong></td>
+                <td>@Model.cout</td>
+            </tr>
+            
+        </tbody>
+
+
+    </table>
+

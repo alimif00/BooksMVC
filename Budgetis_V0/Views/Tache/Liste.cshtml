@@ -12,7 +12,7 @@
     <p>Aucune tâche prévue ..</p>
 }
 else
-{ <table class="table table-bordered table-hover">
+{ <table class="table table-bordered table-hover col-md-4 col-sm-4">
     <thead>
         <tr>
             <th>liste des taches</th>
@@ -25,7 +25,7 @@ else
             <tr>
               
                
-                <td>@Html.ActionLink(task.description, "Detail", "Tache", new { id = task.id }, null)</td>
+                <td>@Html.ActionLink(task.libelle, "Detail", "Tache", new { id = task.id }, null)</td>
                 
             </tr>
             

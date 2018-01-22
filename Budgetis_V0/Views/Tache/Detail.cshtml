@@ -1,26 +1,109 @@
-﻿@model Budgetis_V0.Models.Tache
+﻿@model Budgetis_V0.ViewModel.TacheCategorieTypeViewModel
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.description</h2>
- <table class="table table-bordered table-hover">
-       
-        <tbody>
 
-          
-            <tr>
-                <td> <strong>Description</strong></td>
-                <td>@Model.description</td>
-                </tr>
-            <tr>
-                <td><strong>Cout</strong></td>
-                <td>@Model.cout</td>
-            </tr>
-            
-        </tbody>
+<h2>Tache</h2>
 
 
-    </table>
 
+<div class="form-group">
+    @Html.LabelFor(m => m.tache.typeCategorie.CategorieID)
+    @Html.DropDownListFor(m => m.tache.typeCategorie.CategorieID, new SelectList(Model.Categories, "Id", "Libelle"), "Selectionner une categorie", new { @class = "form-control ddlCategorie" })
+    @Html.ValidationMessageFor(m => m.tache.typeCategorie.CategorieID)
+</div>
+
+@using (Html.BeginForm("Save", "Tache"))
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.tache.TypeCategorieID)
+    @Html.DropDownListFor(m => m.tache.TypeCategorieID, new SelectList(Model.TypeCategories, "Id", "Libelle"), "Selectionner un type", new { @class = "form-control ddlType" })
+    @Html.ValidationMessageFor(m => m.tache.TypeCategorieID)
+</div>
+
+
+<div>
+   <div class="form-group">
+        @Html.LabelFor(m => m.tache.libelle)
+        @Html.TextBoxFor(m => m.tache.libelle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.tache.libelle)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.tache.description)
+        @Html.TextBoxFor(m => m.tache.description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.tache.description)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.tache.cout)
+        @Html.TextBoxFor(m => m.tache.cout, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.tache.cout)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.tache.dateEstimation)
+        @Html.TextBoxFor(m => m.tache.dateEstimation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.tache.dateEstimation)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.tache.dateExecution)
+        @Html.TextBoxFor(m => m.tache.dateExecution, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.tache.dateExecution)
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.tache.isFinished) Executée 
+        </label>
+    </div>
+
+    @Html.HiddenFor(m => m.tache.id)
+ 
+</div>
+<input type="submit" id="bt-save" value="Enregistrer" class="btn btn-primary btn-lg"  style="float:right"/>
+
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+           
+            $(".ddlCategorie").on("change", function () {
+                $.ajax(
+                {
+                    url: "/API/TypeCategories/" + $(this).val(),
+                    type: 'GET',
+                    data: "",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                       
+                       
+                        var appenddata = "<option value = '" + 0 + " '> Veuillez selectionner un type.. </option>";
+                        $.each(data, function (key, value) {
+                            appenddata += "<option value = '" + value.id + " '>" + value.libelle + " </option>";
+                            alert(appenddata);
+                        });
+                        $(".ddlType").html(appenddata);
+
+
+                    },
+                    error: function () {
+                        
+                        alert("Erreur chargement de la liste des types");
+                    }
+                });
+            });
+
+
+
+
+
+        });
+    </script>
+    }

@@ -12,7 +12,21 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                <li>@Html.ActionLink("Taches", "Liste", "Tache")</li>
+                
+                @*<li>@Html.ActionLink("Tableau de bord", "Index", "Tdb")</li>*@
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Taches
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Inserer une tâche", "AjoutTache", "Tache")</li>
+                        <li>@Html.ActionLink("Planifier une tâche", "PlanifierTache", "Tache")</li>
+                        <li>@Html.ActionLink("Liste des tâches", "Index", "Tache")</li>
+                      
+                    </ul>
+                </li>
+                <li>@Html.ActionLink("Paramétrage", "Index", "Parametrage")</li>
                 @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
             </ul>
             @Html.Partial("_LoginPartial")

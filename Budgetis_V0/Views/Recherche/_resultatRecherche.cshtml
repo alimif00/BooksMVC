@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Budgetis_V0.Models.UserTest>
+
+<p>Vue partielle : @DateTime.Now.ToLongTimeString()</p>
+
+<table class="table table-hover">
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+    </tr>
+    @foreach (var person in Model)
+            {
+        <tr>
+            <td>@person.LastName</td>
+            <td>@person.Name</td>
+        </tr>
+    }
+
+
+</table>
+

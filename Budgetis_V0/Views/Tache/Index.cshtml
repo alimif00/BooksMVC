@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Budgetis_V0.Models.Tache>
+   
+
+@{   
+  ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Taches</h2>
+
+
+    <table id="Tasks" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Libelle</th>
+                <th>Description</th>
+                <th>Type </th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+         
+        </tbody>
+    </table>
+
+
+@section scripts{
+    <script> 
+        $(document).ready(function () {
+          var table=  $("#Tasks").DataTable({
+                ajax: {
+                    url: "/API/Taches/",
+                    dataSrc: "",
+                },
+                columns: [
+                    {
+                        data: "libelle",
+                        render: function (data,type,tache) {
+                            return "<a href='/Tache/Detail/"+ tache.id + "'>" + data + "</a>"
+                        } 
+                    },
+                    {
+                        data:"description"
+                    },
+                    {
+                        data: "typeCategorie.libelle"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' name="+ data +">Supprimer</button>"
+                        }
+                    }
+                ]
+            });
+
+
+
+            $("#Tasks").on("click",".js-delete" ,function () {
+                var idTache = $(this).attr("name");
+                var button = $(this)
+                bootbox.confirm("Etes-vous sur de vouloir supprimer cet utilisateur ? ", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/API/taches/" + button.attr("name"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                                
+
+                            }
+
+                        });
+                    }
+                });
+               
+            });
+
+
+
+
+        });
+</script>
+    }

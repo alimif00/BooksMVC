@@ -22,3 +22,23 @@ select,
 textarea {
     max-width: 280px;
 }
+
+  .tdTitle{
+      background-color:darkgray !important; 
+      width:10px !important;
+    }
+  .tdDetail{
+         width:150px !important;
+  }
+  .tableDetail{
+        width:200px !important;
+  }
+
+  .field-validation-error{
+      color: red;
+  }
+
+  .input-validation-error{
+      border: 2px solid red;
+  }
+

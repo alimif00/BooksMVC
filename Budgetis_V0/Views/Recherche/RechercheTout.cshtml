@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Budgetis_V0.Models.UserTest>
+@{
+    ViewBag.Title = "RechercheTout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Recherche</h2>
+
+@*@using (Ajax.BeginForm("ResultatsRecherche", new AjaxOptions
+{
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "resultats",
+}))
+{
+    <input type="submit" value="Rechercher tout" />
+    <p>Vue principale : @DateTime.Now.ToLongTimeString()</p>
+
+
+    <div id="resultats">
+        @{Html.RenderAction("ResultatsRecherche", new { listUsers = Model });
+        }
+    </div>
+   
+
+            }*@
+
+
+<table id="tableId" class="table">
+    @foreach (var person in Model)
+    {
+        <tr>
+            <td>@person.Name</td>
+            <td><button data-user-id="@person.Id" class="btn-link js-delete">Delete</button></td>
+        </tr>
+
+    }
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#tableId .js-delete").on("click", function () {
+                var button =$(this);
+                if (confirm("are you sure you want to delete"))
+                    $.ajax({
+                        url: "/Recherche/RechercheTout/" + $(this).attr("data-user-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+            })
+        });
+
+    </script>
+    
+    
+    }

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Budgetis_V0.Models.UserTest>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List des utilisateurs </h2>
+
+@Html.ActionLink("Ajouter user", "Create")
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Date naissance</td>
+            <td>Membre?</td>
+            <td>Actions</td>
+        </tr>
+      
+
+    </thead>
+    <tbody>
+        @foreach (var user in @Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.LastName</td>
+                <td>@user.DateNaissance</td>
+                <td>@user.IsMember</td>
+                <td>
+                    @Html.ActionLink("Modifier","Edit",new { id= user.Id },null)
+                    @Html.ActionLink("Supprimer", "Delete",new { id= user.Id },null)
+                </td>
+            </tr>
+
+        }
+
+
+    </tbody>
+
+
+</table>
+
+

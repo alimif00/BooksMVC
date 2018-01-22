@@ -1,0 +1,48 @@
+﻿@model Budgetis_V0.ViewModel.UserStatusViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm("Save", "Test"))
+{
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.userM.Name)
+        @Html.TextBoxFor(m => m.userM.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.userM.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.userM.LastName)
+        @Html.TextBoxFor(m => m.userM.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.userM.LastName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.userM.DateNaissance)
+        @Html.TextBoxFor(m => m.userM.DateNaissance, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.userM.DateNaissance)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.userM.SocialStatusTypeId)
+        @Html.DropDownListFor(m => m.userM.SocialStatusTypeId, new SelectList(Model.socialStatusTypes, "Id", "Libelle"), "Select status", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.userM.SocialStatusTypeId)
+    </div>
+
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.userM.IsMember) Membre ADEI
+        </label>
+    </div>
+
+    @Html.HiddenFor(m => m.userM.Id)
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+
+}
+

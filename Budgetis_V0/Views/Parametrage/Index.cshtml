@@ -1,0 +1,69 @@
+﻿@model  Budgetis_V0.ViewModel.DeviseIncomeViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Parametrage</h2>
+@using (Html.BeginForm("Save", "Parametrage"))
+{
+    <table>
+        <tr>
+            <td>
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.income.IncomeValue)
+                    @Html.TextBoxFor(m => m.income.IncomeValue, new { @class = "form-control" })
+                    @*@Html.Label(m => m.Devises.SingleOrDefault(o => o.IsSelected==true).Libelle, new { @class = "form-control" })*@
+
+                    @Html.ValidationMessageFor(m => m.income.IncomeValue)
+                </div>
+            </td>
+            <td>
+
+                <div class="btn-group" data-toggle="buttons">
+
+
+                    @foreach (var d in Model.Devises)
+                    {
+
+                        if (@d.IsSelected)
+                        {
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                @d.Libelle
+                            </label>
+
+                        }
+                        else
+                        {
+                            <label class="btn btn-primary">
+                                <input type="radio" name="options" id="option2" autocomplete="off"> @d.Libelle
+                            </label>
+                        }
+                    }
+
+
+
+                </div>
+            </td>
+        </tr>
+    </table>
+     
+      
+
+    <input type="submit" id="bt-save" value="Enregistrer" class="btn btn-primary btn-lg" style="float:right" />
+
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.Devises.)
+            @Html.DropDownListFor(m => m.tache.TypeCategorieID, new SelectList(Model.TypeCategories, "Id", "Libelle"), "Selectionner un type", new { @class = "form-control ddlType" })
+            @Html.ValidationMessageFor(m => m.tache.TypeCategorieID)
+        </div>*@
+
+}
+@section scripts{
+
+  
+    }

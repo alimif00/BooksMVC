@@ -20,6 +20,14 @@ namespace Budgetis_V0.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<UserTest> UsersTest { get; set; }
+
+        public DbSet<Categorie> Categories { get; set; }
+        public DbSet<TypeCategorie> TypesCategorie { get; set; }
+        public DbSet<SocialStatusType> SocialStatusTypes { get; set; }
+        public DbSet<Tache> Taches { get; set; }
+        public DbSet<Devise> Devises { get; set; }
+        public DbSet<Income> Incomes { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

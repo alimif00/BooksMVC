@@ -1,0 +1,71 @@
+﻿@model Budgetis_V0.ViewModel.CategorieTypeViewModel
+@{
+    ViewBag.Title = "CreateCategorie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Catégorie</h2>
+
+@using (Html.BeginForm("Save", "Test"))
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.categorie.Libelle)
+    @Html.TextBoxFor(m => m.categorie.Libelle, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.categorie.Libelle)
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.categorie.Description)
+    @Html.TextAreaFor(m => m.categorie.Description, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.categorie.Description)
+</div>
+
+
+<h3>Liste des types</h3>
+
+    @*
+    -----------------Liste des types de la catégorie courante ------------------------    
+    *@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>Libelle</td>
+            <td>Description</td>
+            <td>Options</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var type in Model.TypesCategory)
+        {
+            <tr>
+                <td style="display:none">@type.Id</td>
+                <td>@type.Libelle</td>
+                <td>@type.Description</td>
+               <td style="display:none">@type.CategorieID</td>
+                <td>@Html.ActionLink("Supprimer","DeleteType",new { id= @type.Id},null) </td>
+            </tr>
+        }
+        
+        <tr>
+            @Html.Partial("_PartialNewRowType",@Model.TypeCat)
+            <td>
+                 @Html.ActionLink("Insérer", "AddType", new { libelle=Model.TypeCat.Libelle, desc =Model.TypeCat.Description, idCat=Model.categorie.Id}, null)
+            </td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+                @Html.HiddenFor(m => m.categorie.Id)
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            }
+
+
+         
+
